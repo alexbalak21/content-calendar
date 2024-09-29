@@ -14,20 +14,24 @@ import java.util.Optional;
 @Repository
 public class ContentCollectionRepository {
 
-    private final List<Content> content = new ArrayList<>();
+    private final List<Content> contentList = new ArrayList<>();
     public ContentCollectionRepository() {
 
     }
     public List<Content> findAll() {
-        return content;
+        return contentList;
     }
     public Optional<Content> findById(Integer id) {
-        return content.stream().filter(c -> c.id().equals(id)).findFirst();
+        return contentList.stream().filter(c -> c.id().equals(id)).findFirst();
     }
-@PostConstruct
-    private void init() {
-        Content c = new Content(1, "My First Title", "My First Description", Status.IDEA, Type.ARTICLE, LocalDate.now(), null, "https://example.com");
 
-        content.add(c);
+    public void save(Content content){
+        contentList.add(content);
+    }
+
+    @PostConstruct
+    private void init() {
+        Content content = new Content(1, "My First Title", "My First Description", Status.IDEA, Type.ARTICLE, LocalDate.now(), null, "https://example.com");
+        contentList.add(content);
     }
 }
