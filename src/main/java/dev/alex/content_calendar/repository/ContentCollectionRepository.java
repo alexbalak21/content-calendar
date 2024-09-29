@@ -3,6 +3,10 @@ package dev.alex.content_calendar.repository;
 import dev.alex.content_calendar.model.Content;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public class ContentCollectionRepository {
 
@@ -12,5 +16,8 @@ public class ContentCollectionRepository {
     }
     public List<Content> findAll() {
         return content;
+    }
+    public Optional<Content> findById(Integer id) {
+        return content.stream().filter(c -> c.id().equals(id)).findFirst();
     }
 }
