@@ -30,7 +30,6 @@ public class ContentController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found."));
     }
 
-
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     public Content create (@RequestBody Content content){
