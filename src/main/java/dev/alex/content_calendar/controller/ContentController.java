@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/content")
@@ -28,13 +29,32 @@ public class ContentController {
         return repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found."));
     }
+
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public void create (@RequestBody Content content){
+    public Content create (@RequestBody Content content){
         repository.save(content);
+        return content;
     }
 
-    public void update(@RequestBody Content content, Integer id) {
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PutMapping("/{id}")
+    public Content update(@RequestBody Content content, @PathVariable Integer id) {
+        if (!repository.existsById(id))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found.");
+        repository.update(content);
+        return content;
+        }
 
+        @ResponseStatus(HttpStatus.ACCEPTED)
+        @DeleteMapping("/{id}")
+        public Content delete(@PathVariable Integer id) {
+            if (!repository.existsById(id))
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found.");
+            Optional<Content> content = repository.findById(id);
+            repository.deleteById(id);
+            return content.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found."));
+
+        }
     }
-}
