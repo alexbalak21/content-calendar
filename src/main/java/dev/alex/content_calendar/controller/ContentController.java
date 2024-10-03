@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/content")
@@ -33,7 +32,9 @@ public class ContentController {
     @PostMapping("")
     public void create (@RequestBody Content content){
         repository.save(content);
+    }
 
-        
+    public void update(@RequestBody Content content, Integer id) {
+
     }
 }

@@ -29,6 +29,7 @@ public class ContentCollectionRepository {
         contentList.add(content);
     }
 
+
     @PostConstruct
     private void init() {
         Content content = new Content(1, "My First Title", "My First Description", Status.IDEA, Type.ARTICLE, LocalDate.now(), null, "https://example.com");
