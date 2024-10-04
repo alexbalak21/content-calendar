@@ -8,9 +8,9 @@ CREATE TABLE IF NOT EXISTS Content (
     content_type VARCHAR(20) NOT NULL,
     date_created TIMESTAMP NOT NULL,
     date_updated TIMESTAMP,
-    url VARCHAR(255),
-    CONSTRAINT check_status CHECK (status IN ('IDEA', 'IN_PROGRESS', 'COMPLETED', 'PUBLISHED')),
-    CONSTRAINT check_content_type CHECK (content_type IN ('ARTICLE', 'VIDEO', 'COURSE', 'CONFERENCE_TALK'))
+    url VARCHAR(255)
+--     CONSTRAINT check_status CHECK (status IN ('IDEA', 'IN_PROGRESS', 'COMPLETED', 'PUBLISHED')),
+--     CONSTRAINT check_content_type CHECK (content_type IN ('ARTICLE', 'VIDEO', 'COURSE', 'CONFERENCE_TALK'))
     );
 
 INSERT INTO Content (title, `desc`, status, content_type, date_created, date_updated, url)

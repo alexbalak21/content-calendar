@@ -1,7 +1,6 @@
 package dev.alex.content_calendar.controller;
 
 import dev.alex.content_calendar.model.Content;
-import dev.alex.content_calendar.repository.ContentCollectionRepository;
 import dev.alex.content_calendar.repository.ContentJdbcTemplateRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,17 +26,19 @@ public class ContentController {
         return repository.getAllContent();
     }
 
-//    @GetMapping("/{id}")
-//    public Content findById(@PathVariable Integer id) {
-//        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found."));
-//    }
-//
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @PostMapping("")
-//    public Content create(@RequestBody Content content) {
-//        repository.save(content);
-//        return content;
-//    }
+    @GetMapping("/{id}")
+    public Optional<Content> findById(@PathVariable Integer id) {
+        Optional<Content> content = repository.getContentById(id);
+        if (content.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content Not Found");
+        return content;
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("")
+    public Integer create(@RequestBody Content content) {
+        return repository.createContent(content.title(), content.description(), content.status(), content.ContentType(), content.url());
+    }
 //
 //    @ResponseStatus(HttpStatus.ACCEPTED)
 //    @PutMapping("/{id}")

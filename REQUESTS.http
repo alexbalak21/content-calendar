@@ -3,20 +3,17 @@ GET http://localhost:8080/api/content
 
 
 ### GET SINGLE CONTENT
-GET http://localhost:8080/api/content/2
+GET http://localhost:8080/api/content/6
 
 ### POST CONTENT
 POST http://localhost:8080/api/content
 Content-Type: application/json
 
 {
-  "id": 2,
-  "title": "My Second Title",
-  "description": "My Second Description",
+  "title": "Created Title",
+  "description": "Created Description",
   "status": "IDEA",
   "ContentType": "ARTICLE",
-  "dateCreated": "2024-09-30",
-  "dateUpdated": null,
   "url": "https://example.com"
 }
 
@@ -26,7 +23,6 @@ PUT http://localhost:8080/api/content/2
 Content-Type: application/json
 
 {
-  "id": 2,
   "title": "Updated Title",
   "description": "Updated Description",
   "status": "IDEA",
@@ -39,3 +35,7 @@ Content-Type: application/json
 
 ### DELETE CONTENT
 DELETE http://localhost:8080/api/content/2
+
+
+###H2 DATABASE
+http://localhost:8080/h2-console
