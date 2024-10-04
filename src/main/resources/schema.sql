@@ -1,19 +1,27 @@
-CREATE TABLE IF NOT EXISTS Cntent (
-    id INT AUTO_INCREMENT,
-    title VARCHAR(50) NOT NULL ,
+DROP TABLE IF EXISTS Content;
+
+CREATE TABLE IF NOT EXISTS Content (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(50) NOT NULL,
     desc TEXT,
-    status VARCHAR(50) NOT NULL,
-    content_type VARCHAR(50) NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    content_type VARCHAR(20) NOT NULL,
     date_created TIMESTAMP NOT NULL,
     date_updated TIMESTAMP,
     url VARCHAR(255),
-    PRIMARY KEY (id)
-);
+    CONSTRAINT check_status CHECK (status IN ('IDEA', 'IN_PROGRESS', 'COMPLETED', 'PUBLISHED')),
+    CONSTRAINT check_content_type CHECK (content_type IN ('ARTICLE', 'VIDEO', 'COURSE', 'CONFERENCE_TALK'))
+    );
 
-INSERT INTO Cntent (title, desc, status, content_type, date_created, date_updated, url)
-VALUES
-    ('Introduction to AI', 'An article about the basics of AI and its applications.', 'Published', 'Article', NOW(), NOW(), 'https://example.com/intro-to-ai'),
-    ('Getting Started with Python', 'A beginner guide to Python programming.', 'Draft', 'Guide', NOW(), NULL, 'https://example.com/python-guide'),
-    ('Top 10 JavaScript Libraries', 'A list of the most popular JavaScript libraries in 2024.', 'Published', 'List', NOW(), NOW(), 'https://example.com/js-libraries'),
-    ('Healthy Living Tips', 'A collection of tips for a healthier lifestyle.', 'Published', 'Blog Post', NOW(), NOW(), 'https://example.com/healthy-living'),
-    ('Space Exploration Advances', 'An article discussing recent advances in space exploration.', 'Draft', 'Article', NOW(), NULL, 'https://example.com/space-exploration');
+INSERT INTO Content (title, `desc`, status, content_type, date_created, date_updated, url)
+VALUES ('AI Trends in 2024', 'Exploring the latest trends in Artificial Intelligence for 2024.', 'PUBLISHED', 'ARTICLE',
+        NOW(), NOW(), 'https://example.com/ai-trends-2024'),
+       ('Python Programming for Beginners', 'A comprehensive video tutorial for beginners to learn Python.',
+        'COMPLETED', 'VIDEO', NOW(), NOW(), 'https://example.com/python-beginners'),
+       ('Mastering Web Development',
+        'An in-depth web development course focusing on frontend and backend technologies.', 'IN_PROGRESS', 'COURSE',
+        NOW(), NULL, 'https://example.com/web-development-course'),
+       ('Future of Space Exploration', 'A conference talk on the technological advancements driving space exploration.',
+        'IDEA', 'CONFERENCE_TALK', NOW(), NULL, 'https://example.com/space-exploration-talk'),
+       ('Building a Startup from Scratch', 'A guide to starting a new company and navigating the startup ecosystem.',
+        'COMPLETED', 'ARTICLE', NOW(), NOW(), 'https://example.com/startup-guide');
