@@ -26,13 +26,12 @@ public class ContentController {
 
     @GetMapping("/{id}")
     public Content findById(@PathVariable Integer id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found."));
+        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found."));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public Content create (@RequestBody Content content){
+    public Content create(@RequestBody Content content) {
         repository.save(content);
         return content;
     }
@@ -44,16 +43,16 @@ public class ContentController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found.");
         repository.update(content);
         return content;
-        }
-
-        @ResponseStatus(HttpStatus.ACCEPTED)
-        @DeleteMapping("/{id}")
-        public Content delete(@PathVariable Integer id) {
-            if (!repository.existsById(id))
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found.");
-            Optional<Content> content = repository.findById(id);
-            repository.deleteById(id);
-            return content.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found."));
-
-        }
     }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @DeleteMapping("/{id}")
+    public Content delete(@PathVariable Integer id) {
+        if (!repository.existsById(id))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found.");
+        Optional<Content> content = repository.findById(id);
+        repository.deleteById(id);
+        return content.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found."));
+
+    }
+}
