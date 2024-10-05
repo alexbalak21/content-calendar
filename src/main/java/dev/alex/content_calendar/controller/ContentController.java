@@ -1,6 +1,7 @@
 package dev.alex.content_calendar.controller;
 
 import dev.alex.content_calendar.model.Content;
+import dev.alex.content_calendar.model.Status;
 import dev.alex.content_calendar.repository.ContentRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -71,5 +72,10 @@ public class ContentController {
     @GetMapping("/search/{keyword}")
     public List<Content> findByTitleContains(@PathVariable String keyword) {
         return repository.findAllByTitleContainsIgnoreCaseOrDescriptionContainsIgnoreCase(keyword, keyword);
+    }
+
+    @GetMapping("/status/{status}")
+    public List<Content> findByStatus(@PathVariable Status status) {
+        return repository.listByStatus(status);
     }
 }

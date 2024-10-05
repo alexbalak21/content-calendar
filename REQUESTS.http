@@ -40,3 +40,6 @@ http://localhost:8080/h2-console
 
 ### SEARCH
 GET http://localhost:8080/api/content/search/focusing
+
+### FILTER BY STATUS
+GET http://localhost:8080/api/content/status/COMPLETED
