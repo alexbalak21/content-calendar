@@ -37,3 +37,6 @@ DELETE http://localhost:8080/api/content/6
 
 ###H2 DATABASE
 http://localhost:8080/h2-console
+
+### SEARCH
+GET http://localhost:8080/api/content/search/focusing

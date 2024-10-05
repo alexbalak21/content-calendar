@@ -66,4 +66,10 @@ public class ContentController {
         return content.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content id:" + id + "not found."));
 
     }
+
+    //SEARCH CONTENT
+    @GetMapping("/search/{keyword}")
+    public List<Content> findByTitleContains(@PathVariable String keyword) {
+        return repository.findAllByTitleContainsIgnoreCaseOrDescriptionContainsIgnoreCase(keyword, keyword);
+    }
 }
