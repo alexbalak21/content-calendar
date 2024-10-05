@@ -19,7 +19,7 @@ Content-Type: application/json
 
 
 ### PUT CONTENT
-PUT http://localhost:8080/api/content/2
+PUT http://localhost:8080/api/content/6
 Content-Type: application/json
 
 {
@@ -27,8 +27,6 @@ Content-Type: application/json
   "description": "Updated Description",
   "status": "IDEA",
   "ContentType": "ARTICLE",
-  "dateCreated": "2024-09-30",
-  "dateUpdated": null,
   "url": "https://example.com"
 }
 

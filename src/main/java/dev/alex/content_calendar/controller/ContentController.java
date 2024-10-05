@@ -1,7 +1,7 @@
 package dev.alex.content_calendar.controller;
 
 import dev.alex.content_calendar.model.Content;
-import dev.alex.content_calendar.repository.ContentJdbcTemplateRepository;
+import dev.alex.content_calendar.repository.ContentRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -15,20 +15,20 @@ public class ContentController {
 
 //    private final ContentCollectionRepository repository;
 
-    private final ContentJdbcTemplateRepository repository;
+    private final ContentRepository repository;
 
-    public ContentController(ContentJdbcTemplateRepository repository) {
+    public ContentController(ContentRepository repository) {
         this.repository = repository;
     }
 
     @GetMapping("")
     public List<Content> getAll() {
-        return repository.getAllContent();
+        return repository.findAll();
     }
 
     @GetMapping("/{id}")
     public Optional<Content> findById(@PathVariable Integer id) {
-        Optional<Content> content = repository.getContentById(id);
+        Optional<Content> content = repository.findById(id);
         if (content.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content Not Found");
         return content;
@@ -36,8 +36,8 @@ public class ContentController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public Integer create(@RequestBody Content content) {
-        return repository.createContent(content.title(), content.description(), content.status(), content.ContentType(), content.url());
+    public void create(@RequestBody Content content) {
+        repository.save(content);
     }
 //
 //    @ResponseStatus(HttpStatus.ACCEPTED)

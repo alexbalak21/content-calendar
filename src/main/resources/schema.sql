@@ -3,17 +3,17 @@ DROP TABLE IF EXISTS Content;
 CREATE TABLE IF NOT EXISTS Content (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(50) NOT NULL,
-    desc TEXT,
+    description TEXT,
     status VARCHAR(20) NOT NULL,
     content_type VARCHAR(20) NOT NULL,
-    date_created TIMESTAMP NOT NULL,
-    date_updated TIMESTAMP,
-    url VARCHAR(255)
---     CONSTRAINT check_status CHECK (status IN ('IDEA', 'IN_PROGRESS', 'COMPLETED', 'PUBLISHED')),
---     CONSTRAINT check_content_type CHECK (content_type IN ('ARTICLE', 'VIDEO', 'COURSE', 'CONFERENCE_TALK'))
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    date_updated TIMESTAMP DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    url VARCHAR(255),
+    CONSTRAINT check_status CHECK (status IN ('IDEA', 'IN_PROGRESS', 'COMPLETED', 'PUBLISHED')),
+    CONSTRAINT check_content_type CHECK (content_type IN ('ARTICLE', 'VIDEO', 'COURSE', 'CONFERENCE_TALK'))
     );
 
-INSERT INTO Content (title, `desc`, status, content_type, date_created, date_updated, url)
+INSERT INTO Content (title, `description`, status, content_type, date_created, date_updated, url)
 VALUES ('AI Trends in 2024', 'Exploring the latest trends in Artificial Intelligence for 2024.', 'PUBLISHED', 'ARTICLE',
         NOW(), NOW(), 'https://example.com/ai-trends-2024'),
        ('Python Programming for Beginners', 'A comprehensive video tutorial for beginners to learn Python.',
