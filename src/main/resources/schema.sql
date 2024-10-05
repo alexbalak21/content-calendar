@@ -25,3 +25,6 @@ VALUES ('AI Trends in 2024', 'Exploring the latest trends in Artificial Intellig
         'IDEA', 'CONFERENCE_TALK', NOW(), NULL, 'https://example.com/space-exploration-talk'),
        ('Building a Startup from Scratch', 'A guide to starting a new company and navigating the startup ecosystem.',
         'COMPLETED', 'ARTICLE', NOW(), NOW(), 'https://example.com/startup-guide');
+
+--UPDATE Content SET title = 'Updated Title', description = 'This is the updated description of the content.', status = 'IN_PROGRESS', content_type = 'ARTICLE', url = 'https://example.com/updated-url', date_updated = CURRENT_TIMESTAMP WHERE id = 1;
+
